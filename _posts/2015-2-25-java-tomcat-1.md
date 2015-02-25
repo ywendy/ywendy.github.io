@@ -5,29 +5,24 @@ category: java
 tags: tomcat
 ---
 
-所需软件
-	1、jdk6（本人编译tomcat-7.0.59需要使用jdk6,官网说jdk5以上都可以不知道为什么，可能是依赖的jar包里需要的jdk版本不能高于jdk6吧）
-	2、ant
-	3、svn（可以不安装）
-```java
+## 所需软件
+####1、jdk6（本人编译tomcat-7.0.59需要使用jdk6,官网说jdk5以上都可以不知道为什么，可能是依赖的jar包里需要的jdk版本不能高于jdk6吧）
+####2、ant
+####3、svn（可以不安装）
 
-```
-安装ant
+##安装ant
 	1、去官网下载http://ant.apache.org/bindownload.cgi 下载ant
 	2、解压压缩文件
 	3、在环境变量里添加变量 ANT_HOEM = E:\work\apache-ant-1.9.4(自己根据自己的环境修改)
 	4、在path里添加%ANT_HOME%\bin
 	5、在命令行输入ant 如果有反应就表示成功了.
+####图片：
 ![](https://ywendy.github.io/img/ant.png)	
 	
-```java
 
-```
-安装jdk和svn
-	自己搜索如何安装。一般都会。
-```java
+##安装jdk和svn
+####自己搜索如何安装。一般都会。
 
-```
 下载tomcat源码
 	1、如果你有svn，看这里，怎么下载自己看吧。http://tomcat.apache.org/svn.html 里面很多版本，自己折腾吧，我选择的是apache-tomcat-7.0.59
 	2、如果没有安装svn软件或者插件，不要紧，直接下载源代码http://tomcat.apache.org/download-70.cgi 这里可以下载7的，自己点进去看，在页面最下
