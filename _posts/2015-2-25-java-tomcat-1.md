@@ -16,7 +16,7 @@ tags: tomcat
 	4、在path里添加%ANT_HOME%\bin
 	5、在命令行输入ant 如果有反应就表示成功了.
 	
-	![](https://ywendy.github.io/master/img/ant.png)
+	![](https://ywendy.github.io/img/ant.png)
 	
 ## 安装jdk和svn
 	自己搜索如何安装。一般都会。
