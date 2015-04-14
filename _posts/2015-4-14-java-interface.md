@@ -61,10 +61,13 @@ public interface Hockey extends Sports {
 }
 
 
+```
+The Hockey interface has four methods, but it inherits two from Sports; thus,
+ a class that implements Hockey needs to implement all six methods. 
+ Similarly, a class that implements Football needs to define the three methods from Football and the two methods from Sports.
+接口Hockey 有4个方法，但是他从Sport接口中继承了2个方法，因而，一个类去实现Hockey接口，需要去
+实现6个方法，相似的是一个类实现接口Football 必须去实现Football中的三个方法和Sports中的2个方法。
 
-
-
-```java
 
 
 
