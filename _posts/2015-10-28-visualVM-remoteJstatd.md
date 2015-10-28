@@ -50,6 +50,9 @@ options
 在visual vm 中点击工具，选择插件，然后就可以安装了。 visual GC 一般需要安装.安装过程很快.
 ```
 
+## 截图
+
+![](https://ywendy.github.io/img/visualvm_remote_jstatd.png)	
 
 ##参考文献
 
