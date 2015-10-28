@@ -10,7 +10,9 @@ tags:  java patterns singleton 单利模式.
 此模式和spring中的单利作用域是不同的概念，在spring中，只是保证此对象的spring作用的
 上下文里是一个实例。
 单利模式UML图：
-![](https://ywendy.github.io/img/java-patterns-singleton.png)	
+![](https://ywendy.github.io/img/java-patterns-singleton.png)
+
+单利模式有很多种写法，这里实现几种简单的写法，并做简单的分析，记录！	
 ####1、饿汗式
 ```java
 
