@@ -163,6 +163,7 @@ public class Singleton4 {
 枚举类型是无法通过反射获取实例对象的，这个在java.lang.reflect.Constructor 的
 newInstance(Object....obj) 方法里做了判断。
 下面是摘自Constructor类中的代码片段：
+
 ```java
 
     @CallerSensitive
@@ -188,7 +189,9 @@ newInstance(Object....obj) 方法里做了判断。
 ```
 很明心，如果被反射创建对象的是枚举类，则抛出异常IllegalArgumentException，因此，枚举作为单例来说有自己的是可以保证别人无法创建
 额外的对象实例的。
-#####枚举类单例
+<br>
+下面是代码：
+
 ```java
 
 public enum Singleton5 {
