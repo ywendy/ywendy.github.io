@@ -22,7 +22,7 @@ import java.lang.reflect.Constructor;
 
 /**
  * 
- * 饿汗式 . 缺点:<br>
+ * 饿汉式 . 缺点:<br>
  * 1、没有lazy Load，在类被加载的时候就实例化对象。<br>
  * 2、可以通过反射得到许多新的实例对象.
  * 
@@ -192,10 +192,10 @@ newInstance(Object....obj) 方法里做了判断。
 <br>
 下面是代码：
 其实可以不提供getInstance() 方法的，直接使用类名调用INSTANCE 即可.
+
 ```java
 
 public enum Singleton5 {
-
 	INSTANCE;
 	public static Singleton5 getInstance() {
 		return INSTANCE;
