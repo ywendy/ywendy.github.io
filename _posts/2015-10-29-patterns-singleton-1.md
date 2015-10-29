@@ -160,7 +160,35 @@ public class Singleton4 {
 
 ```
 ###4、通过枚举实现单例Enum
+枚举类型是无法通过反射获取实例对象的，这个在java.lang.reflect.Constructor 的
+newInstance(Object....obj) 方法里做了判断。
+下面是摘自Constructor类中的代码片段：
+```java
 
+    @CallerSensitive
+    public T newInstance(Object ... initargs)
+        throws InstantiationException, IllegalAccessException,
+               IllegalArgumentException, InvocationTargetException
+    {
+        if (!override) {
+            if (!Reflection.quickCheckMemberAccess(clazz, modifiers)) {
+                Class<?> caller = Reflection.getCallerClass();
+                checkAccess(caller, clazz, null, modifiers);
+            }
+        }
+        if ((clazz.getModifiers() & Modifier.ENUM) != 0)
+            throw new IllegalArgumentException("Cannot reflectively create enum objects");
+        ConstructorAccessor ca = constructorAccessor;   // read volatile
+        if (ca == null) {
+            ca = acquireConstructorAccessor();
+        }
+        return (T) ca.newInstance(initargs);
+    }
+
+```
+很明心，如果被反射创建对象的是枚举类，则抛出异常IllegalArgumentException，因此，枚举作为单例来说有自己的是可以保证别人无法创建
+额外的对象实例的。
+#####枚举类单例
 ```java
 
 public enum Singleton5 {
