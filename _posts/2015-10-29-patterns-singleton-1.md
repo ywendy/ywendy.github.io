@@ -187,11 +187,11 @@ newInstance(Object....obj) 方法里做了判断。
     }
 
 ```
+
 很明显，如果被反射创建对象的是枚举类，则抛出异常IllegalArgumentException，因此，枚举作为单例来说有自己的是可以保证别人无法创建
 额外的对象实例的。
 <br>
-下面是代码：
-其实可以不提供getInstance() 方法的，直接使用类名调用INSTANCE 即可.
+下面是代码：其实可以不提供getInstance() 方法的，直接使用类名调用INSTANCE 即可.
 
 ```java
 
@@ -203,6 +203,7 @@ public enum Singleton5 {
 }
 
 ```
+
 枚举编译后的代码.(通过java -c -p Singleton5.class 可以查看到)
 ![](https://ywendy.github.io/img/java-singleton-enum.png)
 
