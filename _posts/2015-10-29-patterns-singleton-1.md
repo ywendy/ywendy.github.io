@@ -172,8 +172,8 @@ public enum Singleton5 {
 }
 
 ```
-
-
+枚举编译后的代码.(通过java -c -p Singleton5.class 可以查看到)
+![](https://ywendy.github.io/img/java-singleton-enum.png)
 
 
 
