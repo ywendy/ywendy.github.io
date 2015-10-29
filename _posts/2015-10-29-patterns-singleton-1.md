@@ -82,7 +82,9 @@ public class Singleton1 {
 
 ####2.1同步方法写法
 分析过程如第一种单例代码里。
-```java
+
+```javascript
+
 public class Singleton2 {
 
 	private Singleton2() {
@@ -96,7 +98,6 @@ public class Singleton2 {
 		}
 		return instance;
 	}
-
 }
 
 ```
@@ -105,6 +106,7 @@ public class Singleton2 {
 实例对象不会被创建多次.
 
 ```java
+
 public class Singleton3 {
 
 	private Singleton3() {
@@ -122,7 +124,6 @@ public class Singleton3 {
 		}
 		return instance;
 	}
-
 }
 
 ```
