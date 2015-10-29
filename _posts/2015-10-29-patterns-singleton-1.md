@@ -76,10 +76,100 @@ public class Singleton1 {
 	}
 }
 
+```
+####2、懒汉式
+懒汉式：主要是保证实例的创建，在使用的时候才初始化一次。如果不使用，此实例不会被初始化。
 
+#####2.1同步方法写法
+分析过程如第一种单例代码里。
+```java
+
+public class Singleton2 {
+
+	private Singleton2() {
+	}
+
+	private static Singleton2 instance;
+
+	public synchronized Singleton2 getInstance() {
+		if (instance == null) {
+			instance = new Singleton2();
+		}
+		return instance;
+	}
+
+}
+
+```
+#####2.2双检锁写法
+此种写法，避免代码重排。使用volaticle 关键字，遵照happen-before 法则，从而可以保证
+实例对象不会被创建多次.
+
+```java
+public class Singleton3 {
+
+	private Singleton3() {
+	}
+
+	public static volatile Singleton3 instance;
+
+	public Singleton3 getInstance() {
+		if (instance == null) {
+			synchronized (instance) {
+				if (instance == null) {
+					instance = new Singleton3();
+				}
+			}
+		}
+		return instance;
+	}
+
+}
 
 ```
 
+####3、通过内部类的方式实现单例
+此种方式使用一个静态内部类去实现单例的对象创建，静态内部类声明为私有的，只有在当前类里可以调用
+所以，SingletonHolder 的初始化只有在调用getInstance()方法时才能被初始化。
+由于是静态的，分析过程请查看第一种单例的代码中的注释。
+```java
+public class Singleton4 {
+
+	private Singleton4() {
+	}
+
+	private static class SingletonHolder {
+		public static Singleton4 instance = new Singleton4();
+	}
+
+	public static Singleton4 getInstance() {
+		return SingletonHolder.instance;
+	}
+	
+	
+	public static void main(String[] args) {
+		Singleton4 s1 = Singleton4.getInstance();
+		Singleton4 s2 = Singleton4.getInstance();
+		System.out.println("单例对象1:"+s1);
+		System.out.println("单例对象2:"+s2);
+		System.out.println("单例对象比较"+s1.equals(s2));
+		
+	}
+
+```
+####4、通过枚举实现单例Enum
+
+```java
+public enum Singleton5 {
+
+	INSTANCE;
+	public static Singleton5 getInstance() {
+		return INSTANCE;
+	}
+
+}
+
+```
 
 
 
