@@ -2,18 +2,18 @@
 layout: post
 title:  "java patterns."
 category: patterns
-tags:  java patterns singleton 单利模式.
+tags:  java patterns singleton 单例模式.
 ---
 
-##单利模式
-单利模式在软件开发中经常用到，是一种常见的开发模式.
-此模式和spring中的单利作用域是不同的概念，在spring中，只是保证此对象的spring作用的
+##单例模式
+单例模式在软件开发中经常用到，是一种常见的开发模式.
+此模式和spring中的单例作用域是不同的概念，在spring中，只是保证此对象的spring作用的
 上下文里是一个实例。
-单利模式UML图：
+单例模式UML图：
 ![](https://ywendy.github.io/img/java-patterns-singleton.png)
 
-单利模式有很多种写法，这里实现几种简单的写法，并做简单的分析，记录！	
-###1、饿汗式
+单例模式有很多种写法，这里实现几种简单的写法，并做简单的分析，记录！	
+###1、饿汉式
 ```java
 
 package com.tony.base.patterns.singleton;
@@ -61,16 +61,16 @@ public class Singleton1 {
 		/* 正常的通过静态方法获取对象，每次获取的都是同一个对象. */
 		Singleton1 sg1 = Singleton1.getInstance();
 		Singleton1 sg2 = Singleton1.getInstance();
-		System.out.println("通过单利模式获取的对象equals比较：" + sg1.equals(sg2));
-		System.out.println("单利模式实例对象1：" + sg1);
-		System.out.println("单利模式实例对象2：" + sg2);
+		System.out.println("通过单例模式获取的对象equals比较：" + sg1.equals(sg2));
+		System.out.println("单例模式实例对象1：" + sg1);
+		System.out.println("单例模式实例对象2：" + sg2);
 
 		/* 通过反射获取实例对象，可以构造出多个实例对象出来 */
 		Constructor<Singleton1> con = Singleton1.class.getDeclaredConstructor();
 		con.setAccessible(true);
 		Singleton1 s1 = con.newInstance();
 		Singleton1 s2 = con.newInstance();
-		System.out.println("通过反射获取单利对象equals比较：" + s1.equals(s2));
+		System.out.println("通过反射获取单例对象equals比较：" + s1.equals(s2));
 		System.out.println("反射获取的对象1：" + s1);
 		System.out.println("反射获取对象2：" + s2);
 	}
@@ -187,11 +187,11 @@ newInstance(Object....obj) 方法里做了判断。
     }
 
 ```
-很明心，如果被反射创建对象的是枚举类，则抛出异常IllegalArgumentException，因此，枚举作为单例来说有自己的是可以保证别人无法创建
+很明显，如果被反射创建对象的是枚举类，则抛出异常IllegalArgumentException，因此，枚举作为单例来说有自己的是可以保证别人无法创建
 额外的对象实例的。
 <br>
 下面是代码：
-
+其实可以不提供getInstance() 方法的，直接使用类名调用INSTANCE 即可.
 ```java
 
 public enum Singleton5 {
