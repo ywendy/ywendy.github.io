@@ -116,7 +116,7 @@ public class Singleton3 {
 
 	public Singleton3 getInstance() {
 		if (instance == null) {
-			synchronized (instance) {
+			synchronized (Singleton3.class) {
 				if (instance == null) {
 					instance = new Singleton3();
 				}
@@ -124,6 +124,7 @@ public class Singleton3 {
 		}
 		return instance;
 	}
+
 }
 
 ```
@@ -132,7 +133,9 @@ public class Singleton3 {
 此种方式使用一个静态内部类去实现单例的对象创建，静态内部类声明为私有的，只有在当前类里可以调用
 所以，SingletonHolder 的初始化只有在调用getInstance()方法时才能被初始化。
 由于是静态的，分析过程请查看第一种单例的代码中的注释。
+
 ```java
+
 public class Singleton4 {
 
 	private Singleton4() {
@@ -145,7 +148,6 @@ public class Singleton4 {
 	public static Singleton4 getInstance() {
 		return SingletonHolder.instance;
 	}
-	
 	
 	public static void main(String[] args) {
 		Singleton4 s1 = Singleton4.getInstance();
@@ -160,13 +162,13 @@ public class Singleton4 {
 ###4、通过枚举实现单例Enum
 
 ```java
+
 public enum Singleton5 {
 
 	INSTANCE;
 	public static Singleton5 getInstance() {
 		return INSTANCE;
 	}
-
 }
 
 ```
