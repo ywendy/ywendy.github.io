@@ -2,18 +2,18 @@
 layout: post
 title:  "java patterns."
 category: patterns
-tags:  java patterns singleton 单利模式.
+tags:  java patterns singleton 单例模式.
 ---
 
-##单利模式
-单利模式在软件开发中经常用到，是一种常见的开发模式.
-此模式和spring中的单利作用域是不同的概念，在spring中，只是保证此对象的spring作用的
+##单例模式
+单例模式在软件开发中经常用到，是一种常见的开发模式.
+此模式和spring中的单例作用域是不同的概念，在spring中，只是保证此对象的spring作用的
 上下文里是一个实例。
-单利模式UML图：
+单例模式UML图：
 ![](https://ywendy.github.io/img/java-patterns-singleton.png)
 
-单利模式有很多种写法，这里实现几种简单的写法，并做简单的分析，记录！	
-####1、饿汗式
+单例模式有很多种写法，这里实现几种简单的写法，并做简单的分析，记录！	
+###1、饿汉式
 ```java
 
 package com.tony.base.patterns.singleton;
@@ -22,7 +22,7 @@ import java.lang.reflect.Constructor;
 
 /**
  * 
- * 饿汗式 . 缺点:<br>
+ * 饿汉式 . 缺点:<br>
  * 1、没有lazy Load，在类被加载的时候就实例化对象。<br>
  * 2、可以通过反射得到许多新的实例对象.
  * 
@@ -61,27 +61,151 @@ public class Singleton1 {
 		/* 正常的通过静态方法获取对象，每次获取的都是同一个对象. */
 		Singleton1 sg1 = Singleton1.getInstance();
 		Singleton1 sg2 = Singleton1.getInstance();
-		System.out.println("通过单利模式获取的对象equals比较：" + sg1.equals(sg2));
-		System.out.println("单利模式实例对象1：" + sg1);
-		System.out.println("单利模式实例对象2：" + sg2);
+		System.out.println("通过单例模式获取的对象equals比较：" + sg1.equals(sg2));
+		System.out.println("单例模式实例对象1：" + sg1);
+		System.out.println("单例模式实例对象2：" + sg2);
 
 		/* 通过反射获取实例对象，可以构造出多个实例对象出来 */
 		Constructor<Singleton1> con = Singleton1.class.getDeclaredConstructor();
 		con.setAccessible(true);
 		Singleton1 s1 = con.newInstance();
 		Singleton1 s2 = con.newInstance();
-		System.out.println("通过反射获取单利对象equals比较：" + s1.equals(s2));
+		System.out.println("通过反射获取单例对象equals比较：" + s1.equals(s2));
 		System.out.println("反射获取的对象1：" + s1);
 		System.out.println("反射获取对象2：" + s2);
 	}
 }
 
+```
+###2、懒汉式
+懒汉式：主要是保证实例的创建，在使用的时候才初始化一次。如果不使用，此实例不会被初始化。
 
+####2.1同步方法写法
+分析过程如第一种单例代码里。
+
+```javascript
+
+public class Singleton2 {
+
+	private Singleton2() {
+	}
+
+	private static Singleton2 instance;
+
+	public synchronized Singleton2 getInstance() {
+		if (instance == null) {
+			instance = new Singleton2();
+		}
+		return instance;
+	}
+}
+
+```
+####2.2双检锁写法
+此种写法，避免代码重排。使用volaticle 关键字，遵照happen-before 法则，从而可以保证
+实例对象不会被创建多次.
+
+```java
+
+public class Singleton3 {
+
+	private Singleton3() {
+	}
+
+	public static volatile Singleton3 instance;
+
+	public Singleton3 getInstance() {
+		if (instance == null) {
+			synchronized (Singleton3.class) {
+				if (instance == null) {
+					instance = new Singleton3();
+				}
+			}
+		}
+		return instance;
+	}
+
+}
 
 ```
 
+###3、通过内部类的方式实现单例
+此种方式使用一个静态内部类去实现单例的对象创建，静态内部类声明为私有的，只有在当前类里可以调用
+所以，SingletonHolder 的初始化只有在调用getInstance()方法时才能被初始化。
+由于是静态的，分析过程请查看第一种单例的代码中的注释。
 
+```java
 
+public class Singleton4 {
+
+	private Singleton4() {
+	}
+
+	private static class SingletonHolder {
+		public static Singleton4 instance = new Singleton4();
+	}
+
+	public static Singleton4 getInstance() {
+		return SingletonHolder.instance;
+	}
+	
+	public static void main(String[] args) {
+		Singleton4 s1 = Singleton4.getInstance();
+		Singleton4 s2 = Singleton4.getInstance();
+		System.out.println("单例对象1:"+s1);
+		System.out.println("单例对象2:"+s2);
+		System.out.println("单例对象比较"+s1.equals(s2));
+		
+	}
+
+```
+###4、通过枚举实现单例Enum
+枚举类型是无法通过反射获取实例对象的，这个在java.lang.reflect.Constructor 的
+newInstance(Object....obj) 方法里做了判断。
+下面是摘自Constructor类中的代码片段：
+
+```java
+
+    @CallerSensitive
+    public T newInstance(Object ... initargs)
+        throws InstantiationException, IllegalAccessException,
+               IllegalArgumentException, InvocationTargetException
+    {
+        if (!override) {
+            if (!Reflection.quickCheckMemberAccess(clazz, modifiers)) {
+                Class<?> caller = Reflection.getCallerClass();
+                checkAccess(caller, clazz, null, modifiers);
+            }
+        }
+        if ((clazz.getModifiers() & Modifier.ENUM) != 0)
+            throw new IllegalArgumentException("Cannot reflectively create enum objects");
+        ConstructorAccessor ca = constructorAccessor;   // read volatile
+        if (ca == null) {
+            ca = acquireConstructorAccessor();
+        }
+        return (T) ca.newInstance(initargs);
+    }
+
+```
+
+很明显，如果被反射创建对象的是枚举类，则抛出异常IllegalArgumentException，因此，枚举作为单例来说有自己的是可以保证别人无法创建
+额外的对象实例的。
+<br>
+下面是代码：其实可以不提供getInstance() 方法的，直接使用类名调用INSTANCE 即可.
+
+```java
+
+public enum Singleton5 {
+	INSTANCE;
+	public static Singleton5 getInstance() {
+		return INSTANCE;
+	}
+}
+
+```
+
+枚举编译后的代码.(通过java -c -p Singleton5.class 可以查看到)
+![](https://ywendy.github.io/img/java-singleton-enum.png)
 
 
 
