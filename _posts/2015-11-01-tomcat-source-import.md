@@ -7,6 +7,7 @@ tags:  tomcat源码导入eclipse
 
 ##tomcat 源码导入eclipse
 tomcat web容器，开发中经常用到，下面介绍tomcat如何导入到eclipse调试
+参考tomcat官方文档：http://tomcat.apache.org/tomcat-8.0-doc/building.html
 ###1、准备工具
 ####1.1安装jdk
 tomcat8 对应的jdk7，tomcat9对饮jdk8以上。
