@@ -14,7 +14,7 @@ tags:  tddl diamond 分库 分表.
 
 ###安装
 
-####diamond svn
+
 
 1、svn地址：http://code.taobao.org/svn/diamond
 
@@ -61,6 +61,7 @@ UNIQUE KEY `uk_config_datagroup` (`data_id`,`group_id`));
 ```
 
 启动后的查询异常:
+
 ```java
 
 com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OPTION SQL_SELECT_LIMIT=10000' at line 1
