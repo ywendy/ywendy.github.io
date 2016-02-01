@@ -15,7 +15,6 @@ tags:  tddl diamond 分库 分表.
 ###安装
 
 
-
 1、svn地址：http://code.taobao.org/svn/diamond
 
 2、diamond 下载下来后diamond-sdk 报错，需要调整jdk编译版本到1.7以上
