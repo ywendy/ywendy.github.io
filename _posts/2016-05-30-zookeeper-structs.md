@@ -34,3 +34,9 @@ aversion	|	int 	|节点ACL(授权信息)的更新次数
 ephemeralOwner | long 	| 如果该节点为ephemeral节点, ephemeralOwner值表示与该节点绑定的session id. 如果该节点不是ephemeral节点, ephemeralOwner值为0.
 pzxid		| 	long	| -----
 
+## 4、查看stat 信息在zookeeper 上
+
+```shell
+	get /storm
+```
+![命令行查看zk数据结构](https://ywendy.github.io/img/zk数据结构查看.png)
