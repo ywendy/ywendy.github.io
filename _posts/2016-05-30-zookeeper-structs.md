@@ -16,4 +16,6 @@ tags:  zookeeper ZKDataBase DataTree DataNode.
 
 ## zk 数据结构包含的类
 
-DataBase  
+	DataBase 、DataTree、DataNode
+
+![Alt text](http://ywendy.github.io/img/zookeeper数据结构.png "Optional title")
