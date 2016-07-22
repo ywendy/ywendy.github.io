@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "jstat"
-category: java基础-GC
+category: java基础
 tags:  java GC jstat
 ---
 
