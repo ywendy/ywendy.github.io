@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "rocketmq-nammeser"
+title:  "(三)RocketMQ NameServer注册中心"
 category: MQ
 tags:  rocketmq 
 ---

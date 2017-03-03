@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "rocketmq"
+title:  "(一)RocketMQ模块关系图"
 category: MQ
 tags:  rocketmq 模块关系图 
 ---
