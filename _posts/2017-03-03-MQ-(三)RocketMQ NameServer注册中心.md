@@ -13,7 +13,7 @@ tags:  rocketmq
 
 ####2.nameser  类关系图
 
-![](https://ywendy.github.io/img/rocketmq/NameServer类关系图.png)
+![](https://ywendy.github.io/img/rocketmq/NameServer类关系图001.png)
 
 第三方刚回家看了
 
